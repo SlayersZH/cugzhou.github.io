@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cugzhou.github.io/img/cover3.jpg">
 <meta property="article:published_time" content="2022-09-09T14:52:04.000Z">
-<meta property="article:modified_time" content="2022-09-09T15:59:29.201Z">
+<meta property="article:modified_time" content="2022-09-17T15:22:53.464Z">
 <meta property="article:author" content="Hao Zhou">
 <meta property="article:tag" content="MySQL">
 <meta property="article:tag" content="事务">
@@ -54,7 +54,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2022-09-09 23:59:29'
+  postUpdate: '2022-09-17 23:22:53'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -143,7 +143,7 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/banner.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HaoZhouのblog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MySQL事务隔离级别</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-09T14:52:04.000Z" title="发表于 2022-09-09 22:52:04">2022-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-09T15:59:29.201Z" title="更新于 2022-09-09 23:59:29">2022-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL事务隔离级别"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="数据库事务特性"><a href="#数据库事务特性" class="headerlink" title="数据库事务特性"></a>数据库事务特性</h3><p>在了解MySQL的事务之前，需要先了解数据库的事务的特征，即ACID(原子性，一致性，隔离性，持久性)。</p>
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/favicon.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/banner.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HaoZhouのblog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">MySQL事务隔离级别</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-09T14:52:04.000Z" title="发表于 2022-09-09 22:52:04">2022-09-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-17T15:22:53.464Z" title="更新于 2022-09-17 23:22:53">2022-09-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL事务隔离级别"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="数据库事务特性"><a href="#数据库事务特性" class="headerlink" title="数据库事务特性"></a>数据库事务特性</h3><p>在了解MySQL的事务之前，需要先了解数据库的事务的特征，即ACID(原子性，一致性，隔离性，持久性)。</p>
 <ul>
 <li>原子性(Atomicity)：事务中对数据库的操作，要么都执行，要么都不执行</li>
 <li>一致性(Consistency)：事务开始前和事务结束后，数据库的完整性没有被破坏，对数据的修改必须符合预设规则。</li>
@@ -163,8 +163,13 @@
 </li>
 </ul>
 <h3 id="MySQL隔离级别"><a href="#MySQL隔离级别" class="headerlink" title="MySQL隔离级别"></a>MySQL隔离级别</h3><p>数据库事务具有隔离性的特点，即防止多个事务同时执行过程中导致数据不一致。在MySQL中，MySQL设置了四种不同的隔离级别，来防止多个事务同时执行导致数据不一致的问题。这四种隔离级别分别是：读未提交、读已提交、可重复读、可串行化。</p>
-<p>但是值得注意的是，并不是每一种隔离级别都可以避免所有的并发事务存在的问题。想避免所有的并发事务存在的问题，那么相应的也要付出更多的代价。这点也很好理解，要是有一个方式又可以避免并发事务存在的问题，还不会导致其他方面出现问题，那何必折腾这么多呢？</p>
-<p>首先我们来看下这四种隔离级别能解决哪些并发事务的问题。</p>
+<ul>
+<li>读未提交：允许事务读取其他事务未提交的数据</li>
+<li>读已提交：允许事务读取其他事务已经提交的数据，未提交的修改无法读取</li>
+<li>可重复读：一个事务中多次读取，结果相同。不管其他事务是否对这些数据进行操作</li>
+<li>可串行化：最严格的事务隔离，每个事务都一个个执行。既然并发事务会导致数据不一致的问题，那么不让事务并发执行，那不就不会有问题吗？</li>
+</ul>
+<p>但是值得注意的是，并不是每一种隔离级别都可以避免所有的并发事务存在的问题。想避免所有的并发事务存在的问题，那么相应的也要付出更多的代价。这点也很好理解，要是有一个方式可以避免并发事务存在的问题，还不会导致其他方面出现问题，那何必折腾这么多呢？我们来看下这四种隔离级别能解决哪些并发事务的问题。</p>
 <table>
 <thead>
 <tr>
@@ -199,12 +204,140 @@
 <td>不存在</td>
 </tr>
 </tbody></table>
+<p>可以看到，隔离级别越低，对事务的限制越少，数据库的性能也会越好，但是存在的问题也是最多的。正因如此，很多数据库的默认隔离级别都是读已提交。但是值得注意的是，<strong>InnoDB搜索引擎默认的隔离级别是可重复读</strong>。</p>
+<h3 id="MySQL的锁"><a href="#MySQL的锁" class="headerlink" title="MySQL的锁"></a>MySQL的锁</h3><p>锁是规避并发执行程序时出现冲突的一种很好的方式，MySQL也不例外。MySQL实现事务隔离离不开锁，包括共享锁、独占锁、意向锁、记录锁、间隙锁、Next-Key锁、插入意向锁、自增锁、空间索引谓语锁。</p>
+<p>下面对和事务隔离有关的锁进行解释。</p>
+<h4 id="共享锁和独占锁"><a href="#共享锁和独占锁" class="headerlink" title="共享锁和独占锁"></a>共享锁和独占锁</h4><p>InnoDB实现了标准的行级锁，其中有两种类型的锁：共享锁和独占锁。</p>
 <ul>
-<li>读未提交：在这种级别下，只能有一个事务对数据进行修改，其他事务只能读取数据。</li>
-<li>读已提交：在读未提交的基础上，增加了限定条件，当有事务对数据进行写时，只有写的事务提交后，才能对数据进行读取。</li>
-<li>可重复读：在以上的基础上，再增加一个限定条件，当对数据进行读的事务开始时，可以允许其他事务读取数据，但是不允许写数据。</li>
-<li>可串行化：最严格的事务隔离，每个事务都一个个执行。既然并发事务会导致数据不一致的问题，那么不让事务并发执行，那不就不会有问题吗？</li>
+<li>共享锁(S)：允许事务在读取一行的时候加锁。</li>
+<li>独占锁(X)：允许事务更新和删除一行记录。</li>
 </ul>
-<h3 id="MySQL隔离级别实现原理"><a href="#MySQL隔离级别实现原理" class="headerlink" title="MySQL隔离级别实现原理"></a>MySQL隔离级别实现原理</h3><p>未完待续</p>
-<h3 id="MySQL的锁"><a href="#MySQL的锁" class="headerlink" title="MySQL的锁"></a>MySQL的锁</h3><p>未完待续</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://cugzhou.github.io">Hao Zhou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cugzhou.github.io/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">https://cugzhou.github.io/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cugzhou.github.io" target="_blank">HaoZhouのblog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a><a class="post-meta__tags" href="/tags/%E4%BA%8B%E5%8A%A1/">事务</a></div><div class="post_share"><div class="social-share" data-image="/img/cover3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/"><img class="next-cover" src="/img/cover2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL索引及优化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/" title="MySQL索引及优化"><img class="cover" src="/img/cover2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-29</div><div class="title">MySQL索引及优化</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Hao Zhou</div><div class="author-info__description">Take notes and enjoy life</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/cugzhou/cugzhou.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">数据库事务特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%E4%BA%8B%E5%8A%A1%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">并发执行事务存在的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">MySQL隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">MySQL隔离级别实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E7%9A%84%E9%94%81"><span class="toc-number">5.</span> <span class="toc-text">MySQL的锁</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" title="MySQL事务隔离级别"><img src="/img/cover3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL事务隔离级别"/></a><div class="content"><a class="title" href="/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" title="MySQL事务隔离级别">MySQL事务隔离级别</a><time datetime="2022-09-09T14:52:04.000Z" title="发表于 2022-09-09 22:52:04">2022-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/" title="MySQL索引及优化"><img src="/img/cover2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL索引及优化"/></a><div class="content"><a class="title" href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/" title="MySQL索引及优化">MySQL索引及优化</a><time datetime="2022-08-29T14:20:14.000Z" title="发表于 2022-08-29 22:20:14">2022-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/28/butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%8F%8AHexo%E9%85%8D%E7%BD%AE/" title="butterfly主题安装及Hexo配置"><img src="/img/cover1.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="butterfly主题安装及Hexo配置"/></a><div class="content"><a class="title" href="/2022/08/28/butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%8F%8AHexo%E9%85%8D%E7%BD%AE/" title="butterfly主题安装及Hexo配置">butterfly主题安装及Hexo配置</a><time datetime="2022-08-28T13:25:57.000Z" title="发表于 2022-08-28 21:25:57">2022-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/28/hello-world/" title="Hello World"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/08/28/hello-world/" title="Hello World">Hello World</a><time datetime="2022-08-28T07:33:03.370Z" title="发表于 2022-08-28 15:33:03">2022-08-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Hao Zhou</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+<p>如果事务T1在某一行持有共享锁，当另外一个事务T2对该行的锁请求的处理如下：</p>
+<ul>
+<li>允许T2立即请求共享锁，最后T1和T2都会对该行持有共享锁</li>
+<li>如果T2请求独占锁，那么需要等待T1的锁释放。</li>
+</ul>
+<p>如果事务T1在某一行持有的是独占锁，那么其他事务都要等待T1的锁释放才能再次上锁。</p>
+<h4 id="意向锁"><a href="#意向锁" class="headerlink" title="意向锁"></a>意向锁</h4><p>意向锁是一个表级别的锁，用来表明一个事务正在或将对表中的某行数据加S锁或X锁。因此意向锁也有两种：</p>
+<ul>
+<li>意向共享锁(IS)。表明一个事务将对表中的某几行加S锁</li>
+<li>意向排他锁(IX)。表明一个事务将对表中的某几行加X锁</li>
+</ul>
+<p>意向锁的协议：</p>
+<ul>
+<li>在事务持有表中行的共享锁前，它必须先持有表的意向共享锁或更强的锁</li>
+<li>在事务持有表中行的排他锁之前，它必须先持有表的意向排他锁</li>
+</ul>
+<p>以上规则可以总结成：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>排他锁</th>
+<th>意向排他锁</th>
+<th>共享锁</th>
+<th>意向共享锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>排他锁</strong></td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+<td>冲突</td>
+</tr>
+<tr>
+<td><strong>意向排他锁</strong></td>
+<td>冲突</td>
+<td>兼容</td>
+<td>冲突</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td><strong>共享锁</strong></td>
+<td>冲突</td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+<tr>
+<td><strong>意向共享锁</strong></td>
+<td>冲突</td>
+<td>兼容</td>
+<td>兼容</td>
+<td>兼容</td>
+</tr>
+</tbody></table>
+<p>文字总结：意向锁之间都是兼容的，共享锁和意向共享锁都是互相兼容的，其他都有冲突。</p>
+<h4 id="行锁"><a href="#行锁" class="headerlink" title="行锁"></a>行锁</h4><p>行锁是锁定索引的一种锁。即便表中没有索引，InnoDB也会默认创建一个索引列。</p>
+<h4 id="间隙锁"><a href="#间隙锁" class="headerlink" title="间隙锁"></a>间隙锁</h4><p>间隙锁就是锁住索引之间的记录，或者锁住第一个索引前或者最后一个索引后的记录，<strong>并且不会包含记录本身</strong>。例如，SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE；防止其他事务将值 15 插入 t.c1 列，无论该列中是否已经存在任何此类值，因为该范围内所有现有值之间的间隙都已锁定。</p>
+<p>间隙锁是在可重复读级别下产生的。</p>
+<h4 id="Next-Key锁"><a href="#Next-Key锁" class="headerlink" title="Next-Key锁"></a>Next-Key锁</h4><p>Next-Key锁是行锁和索引之前的间隙锁的组合。什么意思呢？举个栗子，假设索引包含值 10、11、13 和 20，那么Next-Key锁可能的范围就是：( 负无穷, 10]、(10, 11]、(11, 13]、(13, 20]、(20, 正无穷)</p>
+<p>如果一个事务在索引中的某个记录 R 上具有共享或排他锁，则另一个事务不能在索引顺序中 R 之前的间隙中插入新的索引记录。</p>
+<p><strong>前面我们提到过，可重复读的隔离级别下，会出现幻读问题。而InnoDB通过Next-Key锁，可以锁定表中部分还不存在的记录，从而解决了这个问题。</strong></p>
+<h4 id="插入意向锁"><a href="#插入意向锁" class="headerlink" title="插入意向锁"></a>插入意向锁</h4><p>插入意向锁也是一种间隙锁形式的意向锁，在对行记录的插入前加锁。多个事务插入相同的索引间隙时，只要不是插入到相同的位置，则不需要进行锁等待。</p>
+<h4 id="自增锁"><a href="#自增锁" class="headerlink" title="自增锁"></a>自增锁</h4><p>特殊的表级锁，由插入到具有 AUTO_INCREMENT 列的表中的事务使用。</p>
+<h4 id="空间索引谓语锁"><a href="#空间索引谓语锁" class="headerlink" title="空间索引谓语锁"></a>空间索引谓语锁</h4><p>多维数据中没有绝对的排序概念，所以不清楚哪个是Next-Key。为了支持具有空间索引的表的隔离级别，InnoDB 使用谓词锁。</p>
+<h3 id="MySQL的MVCC"><a href="#MySQL的MVCC" class="headerlink" title="MySQL的MVCC"></a>MySQL的MVCC</h3><p>通过锁可以实现隔离级别。而对于MySQL，则是通过锁和MVCC共同实现的隔离级别。引入MVCC的原因，是因为单纯通过锁来实现隔离级别，会导致频繁加锁、释放锁的操作，对性能影响大，并且很容易出现锁的冲突。MVCC是啥呢，就是Multi-Version Concurrency Control的缩写，即多版本并发控制。MVCC只在<strong>读已提交</strong>和<strong>可重复读</strong>两个隔离级别下工作。其他两个隔离级别够和MVCC不兼容, 因为<strong>读未提交</strong>总是读取最新的数据行, 而不是符合当前事务版本的数据行。而<strong>可串行化</strong>则会对所有读取的行都加锁。</p>
+<p>MVCC 通过保存数据在某个时间点的快照来维护多版本数据，保证读取快照的事务不会出现阻塞。与之对应的，还有一种被称为当前读。</p>
+<h4 id="快照读和当前读"><a href="#快照读和当前读" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h4><ul>
+<li><strong>快照读</strong>（一致性非锁定读） ：快照读时，事务读到的数据项可能是一个历史快照。而写操作不覆盖已有数据项，而是创建一个新的版本，直至所在事务提交时才变为可见。对于不加锁的select，那么就是进行的快照读（可串行化和读未提交除外，这个时候就不存在MVCC了）</li>
+<li><strong>当前读</strong> （一致性锁定读）：对当前读取的数据加锁，保证是最新的。如update、insert、delete、串行化隔离级别、select for update、select lock in share lock</li>
+</ul>
+<p>既然需要保存不同时间点的快照数据，那么这块又是怎么实现的呢？最简单的，就是每次数据出现改动时，不是在原来的基础上覆盖，而是新增一份记录，把新的和老的都保存。为了实现这个逻辑，MySQL做了如下的操作。</p>
+<h4 id="版本链"><a href="#版本链" class="headerlink" title="版本链"></a>版本链</h4><p>每个事务都有一个唯一并且递增的id，用于区分事务执行的顺序。在这个的基础上，MySQL中的每行记录都会有几个隐藏的字段</p>
+<ul>
+<li><p>trx_id : 事务字段，当一个事务去操作某个行的数据时，会将自己的事务id赋值给trx_id字段 </p>
+</li>
+<li><p>roll_ptr : 回滚指针，当一个事务更新了一个字段的时候，并不会直接删除掉之前的字段，而是将该指针指向之前的字段存储到undo blog</p>
+</li>
+</ul>
+<p><em>undo log用于数据的撤回操作，它记录了修改的反向操作，比如，插入对应删除，通过undo log可以实现事务回滚，并且可以根据undo log回溯到某个特定的版本的数据，实现MVCC。</em></p>
+<h4 id="ReadView"><a href="#ReadView" class="headerlink" title="ReadView"></a>ReadView</h4><p>既然每条记录会有多个版本的快照存在，那么问题来了，如何怎么判断每个读取的事务该读取哪个版本的快照呢？</p>
+<p>现在我们假设一个场景，一个事务A在时刻3对数据库进行查询，另外一个事务B在时刻4插入一条符合查询条件的记录，而事务A在时刻5再次进行查询。</p>
+<p>在读已提交的隔离级别下，我们知道事务A会出现不可重复读的问题。而可重复读的隔离级别下，不会出现这样的问题。其实，这就是通过ReadView来控制的。</p>
+<p>ReadView是保存事务ID的list。记录的是本事务执行时，MySQL中还有哪些活跃的事务。这里面涉及到这样几个概念：</p>
+<ul>
+<li>m_ids。生成ReadView的时候，MySQL中正在执行的事务的id</li>
+<li>min_trx_id。指m_ids 里最小的值</li>
+<li>max_trx_id。是指下一个要生成的事务id。下一个要生成的事务id肯定比现在所有事务的 id 都大</li>
+<li>creator_trx_id。每开启一个事务都会生成一个ReadView，而creator_trx_id就是这个开启的事务的id。</li>
+</ul>
+<p>那么，当访问一条记录的版本号为trx_id的时候，就会出现这样的几种情况：</p>
+<ul>
+<li>当trx_id小于min_trx_id，说明这个版本已经提交过，可以访问</li>
+<li>如果trx_id在min_tx_id和max_trx_id中间，那么就要判断tfx_id是否在m_ids中存在，如果存在，说明事务还在执行中，无法访问。如果不存在，说明这个事务已经完成，可以访问</li>
+<li>如果trx_id大于max_trx_id，说明这个版本的数据是在目前的ReadView后面提交的，则不可读</li>
+<li>如果trx_id和creator_trx_id相等，说明这个版本的数据就是生成这个ReadView的事务创建的，可读</li>
+</ul>
+<p>回到前面假设的场景中，读已提交和可重复读就是通过创建ReadView的时机来控制隔离级别。</p>
+<ul>
+<li>读已提交。每次读取数据前都生成一个ReadView</li>
+<li>可重复读。在第一次读取数据的时候生成一个ReadView</li>
+</ul>
+<p>可以看出，可重复读的情况下，事务A在读取的过程中，不管其他事务插入了什么数据，这些数据对于事务A都是不可见的(因此其他事务插入的数据的trx_id大于创建ReadView时的max_trx_id)，所以可以保证事务A每次读取的结果是一致的。</p>
+<h3 id="MySQL隔离级别实现原理总结"><a href="#MySQL隔离级别实现原理总结" class="headerlink" title="MySQL隔离级别实现原理总结"></a>MySQL隔离级别实现原理总结</h3><table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>实现原理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交</td>
+<td>对被读取的数据不加锁，都是当前读<br>对写操作，在更新数据的瞬间添加<strong>行级共享锁</strong>，事务结束后释放</td>
+</tr>
+<tr>
+<td>读已提交</td>
+<td>对被读取的数据不加锁，但是读取的是快照，并且每次读取数据都会生成一个ReadView<br>对写操作，在更新数据的瞬间添加<strong>行级排他锁</strong>（Record），事务结束后释放</td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>对被读取的数据不加锁，但是读取的是快照，只在事务开始的时候生成ReadView<br>对写操作，在更新数据的瞬间添加<strong>行级排他锁</strong>（Record，GAP，Next-key），事务结束后释放</td>
+</tr>
+<tr>
+<td>可串行化</td>
+<td>对被读取的数据加<strong>表级共享锁</strong>，当前读，读取的事务结束后释放<br>对写操作，先加<strong>表级排他锁</strong>，事务结束后释放</td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://cugzhou.github.io">Hao Zhou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://cugzhou.github.io/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">https://cugzhou.github.io/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://cugzhou.github.io" target="_blank">HaoZhouのblog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a><a class="post-meta__tags" href="/tags/%E4%BA%8B%E5%8A%A1/">事务</a></div><div class="post_share"><div class="social-share" data-image="/img/cover3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/"><img class="next-cover" src="/img/cover2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL索引及优化</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/" title="MySQL索引及优化"><img class="cover" src="/img/cover2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-29</div><div class="title">MySQL索引及优化</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/favicon.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Hao Zhou</div><div class="author-info__description">Take notes and enjoy life</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/cugzhou/cugzhou.github.io"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E7%89%B9%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">数据库事务特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%E4%BA%8B%E5%8A%A1%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">并发执行事务存在的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">MySQL隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E7%9A%84%E9%94%81"><span class="toc-number">4.</span> <span class="toc-text">MySQL的锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E9%94%81%E5%92%8C%E7%8B%AC%E5%8D%A0%E9%94%81"><span class="toc-number">4.1.</span> <span class="toc-text">共享锁和独占锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%84%8F%E5%90%91%E9%94%81"><span class="toc-number">4.2.</span> <span class="toc-text">意向锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E9%94%81"><span class="toc-number">4.3.</span> <span class="toc-text">行锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%B4%E9%9A%99%E9%94%81"><span class="toc-number">4.4.</span> <span class="toc-text">间隙锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Next-Key%E9%94%81"><span class="toc-number">4.5.</span> <span class="toc-text">Next-Key锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%84%8F%E5%90%91%E9%94%81"><span class="toc-number">4.6.</span> <span class="toc-text">插入意向锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E%E9%94%81"><span class="toc-number">4.7.</span> <span class="toc-text">自增锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E7%B4%A2%E5%BC%95%E8%B0%93%E8%AF%AD%E9%94%81"><span class="toc-number">4.8.</span> <span class="toc-text">空间索引谓语锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E7%9A%84MVCC"><span class="toc-number">5.</span> <span class="toc-text">MySQL的MVCC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E7%85%A7%E8%AF%BB%E5%92%8C%E5%BD%93%E5%89%8D%E8%AF%BB"><span class="toc-number">5.1.</span> <span class="toc-text">快照读和当前读</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E9%93%BE"><span class="toc-number">5.2.</span> <span class="toc-text">版本链</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ReadView"><span class="toc-number">5.3.</span> <span class="toc-text">ReadView</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">MySQL隔离级别实现原理总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" title="MySQL事务隔离级别"><img src="/img/cover3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL事务隔离级别"/></a><div class="content"><a class="title" href="/2022/09/09/MySQL%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" title="MySQL事务隔离级别">MySQL事务隔离级别</a><time datetime="2022-09-09T14:52:04.000Z" title="发表于 2022-09-09 22:52:04">2022-09-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/" title="MySQL索引及优化"><img src="/img/cover2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL索引及优化"/></a><div class="content"><a class="title" href="/2022/08/29/MySQL%E7%B4%A2%E5%BC%95%E5%8F%8A%E4%BC%98%E5%8C%96/" title="MySQL索引及优化">MySQL索引及优化</a><time datetime="2022-08-29T14:20:14.000Z" title="发表于 2022-08-29 22:20:14">2022-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/28/butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%8F%8AHexo%E9%85%8D%E7%BD%AE/" title="butterfly主题安装及Hexo配置"><img src="/img/cover1.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="butterfly主题安装及Hexo配置"/></a><div class="content"><a class="title" href="/2022/08/28/butterfly%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E5%8F%8AHexo%E9%85%8D%E7%BD%AE/" title="butterfly主题安装及Hexo配置">butterfly主题安装及Hexo配置</a><time datetime="2022-08-28T13:25:57.000Z" title="发表于 2022-08-28 21:25:57">2022-08-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/28/hello-world/" title="Hello World"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/08/28/hello-world/" title="Hello World">Hello World</a><time datetime="2022-08-28T07:33:03.370Z" title="发表于 2022-08-28 15:33:03">2022-08-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Hao Zhou</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
